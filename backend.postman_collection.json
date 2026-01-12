@@ -1,0 +1,1126 @@
+{
+	"info": {
+		"_postman_id": "c3bc7e56-4f43-4407-abed-6309ac7124c6",
+		"name": "backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44733497",
+		"_collection_link": "https://paulnarvaez.postman.co/workspace/be6b5c4e-527d-41ca-88d3-f9ec97388377/collection/44733497-c3bc7e56-4f43-4407-abed-6309ac7124c6?action=share&source=collection_link&creator=44733497"
+	},
+	"item": [
+		{
+			"name": "Untitled Request",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/inscripciones",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_estudiante\": 1, \r\n    \"id_materia\": 1,\r\n    \"semestre\": \"2025-II\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/inscripciones",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inscripciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/inscripciones",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_estudiante\": 1, \r\n    \"id_materia\": 1,\r\n    \"semestre\": \"2025-II\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/inscripciones",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inscripciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesor-materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/profesor-materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesor-materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesor-materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/profesor-materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesor-materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesor-materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/profesor-materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesor-materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesor-materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/profesor-materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesor-materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesor-materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_profesor\": 1, \r\n    \"id_materia\": 1     \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesor-materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesor-materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": [\r\n        {\r\n            \"nombre_titulo\": \"Doctorado en Ingeniería\",\r\n            \"universidad_emisora\": \"MIT\",\r\n            \"fecha_obtencion\": \"2018-06-15T00:00:00Z\"\r\n        }\r\n    ],\r\n    \"materias_asignadas\": [] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana rebeca\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": [\r\n        {\r\n            \"nombre_titulo\": \"Doctorado en Ingeniería de software\",\r\n            \"universidad_emisora\": \"MIT\",\r\n            \"fecha_obtencion\": \"2018-06-15T00:00:00Z\"\r\n        }\r\n    ],\r\n    \"materia\": [] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana rebeca\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": [\r\n        {\r\n            \"nombre_titulo\": \"Doctorado en Ingeniería de software\",\r\n            \"universidad_emisora\": \"MIT\",\r\n            \"fecha_obtencion\": \"2018-06-15T00:00:00Z\"\r\n        }\r\n    ],\r\n    \"materias\": [] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombres\": \"Ana María\",\r\n  \"apellidos\": \"Vargas\",\r\n  \"cedula\": \"1010101010\",\r\n  \"email\": \"ana.vargas@uni.edu.ec\",\r\n  \"titulos\": [\r\n    {\r\n      \"nombre_titulo\": \"Doctorado en Ingeniería\",\r\n      \"universidad_emisora\": \"MIT\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombres\": \"Ana María\",\r\n  \"apellidos\": \"Vargas\",\r\n  \"cedula\": \"1010101010\",\r\n  \"email\": \"ana.vargas@uni.edu.ec\",\r\n  \"titulo\": \"Doctorado en Ingeniería\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": \"Doctorado en Ingeniería\" \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": \"Doctorado en Ingeniería\" \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulo\": \"Doctorado en Ingeniería\" \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulo\": [\r\n        {\r\n            \"nombre_titulo\": \"Doctorado en Ingeniería\",\r\n            \"universidad_emisora\": \"MIT\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": [\r\n        {\r\n            \"nombre_titulo\": \"Doctorado en Ingeniería\",\r\n            \"universidad_emisora\": \"MIT\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Ana María\",\r\n    \"apellidos\": \"Vargas\",\r\n    \"cedula\": \"1010101010\",\r\n    \"email\": \"ana.vargas@uni.edu.ec\",\r\n    \"titulos\": [\r\n        {\r\n            \"nombre_titulos\": \"Doctorado en Ingeniería\",\r\n            \"universidad_emisora\": \"MIT\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/titulos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_titulo\": \"Doctorado en matematicas\",\r\n    \"universidad_emisora\": \"Universidad de Cambridge\",\r\n    \"fecha_obtencion\": \"2018-06-15T00:00:00Z\", // <-- ¡FORMATO CORREGIDO!\r\n    \"id_profesor\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/titulos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"titulos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/titulo",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_titulo\": \"Doctorado en matematicas\",\r\n    \"universidad_emisora\": \"Universidad de Cambridge\",\r\n    \"fecha_obtencion\": \"2018-06-15T00:00:00Z\", // <-- ¡FORMATO CORREGIDO!\r\n    \"id_profesor\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/titulo",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"titulo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/titulos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_titulo\": \"Doctorado en matematicas\",\r\n    \"universidad_emisora\": \"Universidad de Cambridge\",\r\n    \"fecha_obtencion\": \"2018-06-15T00:00:00Z\", // <-- ¡FORMATO CORREGIDO!\r\n    \"id_profesor\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/titulos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"titulos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/materias",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_materia\": \"Bases de Datos Avanzadas\",\r\n    \"creditos\": 4,\r\n    \"id_carrera\": 1,\r\n    \"id_aula\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/materias",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"materias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/materias",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_materia\": \"Bases de Datos Avanzadas\",\r\n    \"creditos\": 4,\r\n    \"id_carrera\": 1,\r\n    \"id_aula\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/materias",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"materias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_materia\": \"Bases de Datos Avanzadas\",\r\n    \"creditos\": 4,\r\n    \"id_carrera\": 1,\r\n    \"id_aula\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"id_carrera\": 1,\r\n    \"id_aula\": 1,\r\n    \"nombre_materia\": \"Bases de Datos Avanzadas\",\r\n    \"creditos\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_materia\": \"Bases de Datos Avanzadas\",\r\n    \"creditos\": 4,\r\n    \"id_carrera\": 1,\r\n    \"id_aula\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/materia",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_materia\": \"Bases de Datos Avanzadas\",\r\n    \"creditos\": 4,\r\n    \"id_carrera\": 1,\r\n    \"id_aula\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/materia",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/aulas",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numero_aula\": \"A-101\",\r\n    \"edificio\": \"Ciencias y Tecnología\",\r\n    \"capacidad\": 40\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/aulas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"aulas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/carreras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/carreras",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"carreras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/carreras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"nombre_carrera\": \"Ingeniería de Software\",\r\n    \"descripcion\": \"Carrera enfocada en el desarrollo y mantenimiento de sistemas de software.\",\r\n    \"duracion_semestres\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/carreras",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"carreras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/carreras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_carrera\": 1,\r\n    \"nombre_carrera\": \"Ingeniería de Software\",\r\n    \"descripcion\": \"Carrera enfocada en el desarrollo y mantenimiento de sistemas de software.\",\r\n    \"duracion_semestres\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/carreras",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"carreras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/profesores",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"juan\",\r\n    \"apellidos\": \"Sas\",\r\n    \"cedula\": \"1122334455\",\r\n    \"email\": \"a.santacruz@uni.edu.ec\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/profesores",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/estudiantes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"María\",\r\n    \"apellidos\": \"Rojas\",\r\n    \"cedula\": \"0987654321\",\r\n    \"email\": \"maria.rojas@correo.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/estudiantes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/estudiantes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombres\": \"Carlos\",\r\n  \"apellidos\": \"Narváez\",\r\n  \"cedula\": \"0102030405\",\r\n  \"email\": \"carlos@example.com\",\r\n  \"fecha_nacimiento\": \"2000-05-12\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/estudiantes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/estudiantes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/estudiantes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/estudiantes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/estudiantes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/estudiantes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/estudiantes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

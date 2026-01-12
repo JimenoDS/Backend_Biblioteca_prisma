@@ -1,0 +1,49 @@
+// prisma/profesores/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/client-profesores"
+}
+
+datasource db {
+  provider = "postgresql"
+
+}
+
+model Profesor {
+  id_profesor        Int               @id @default(autoincrement())
+  nombres            String
+  apellidos          String
+  cedula             String            @unique
+  email              String            @unique
+  
+  titulos            Titulo[]
+  materias_asignadas ProfesorMateria[]
+
+  @@map("profesores")
+}
+
+model Titulo {
+  id_titulo           Int       @id @default(autoincrement())
+  nombre_titulo       String
+  universidad_emisora String?
+  fecha_obtencion     DateTime? @db.Date
+
+  id_profesor         Int
+  profesor            Profesor  @relation(fields: [id_profesor], references: [id_profesor], onDelete: Cascade)
+
+  @@map("titulos")
+}
+
+model ProfesorMateria {
+  id          Int      @id @default(autoincrement())
+  
+  id_profesor Int
+  profesor    Profesor @relation(fields: [id_profesor], references: [id_profesor])
+  
+  // RELACIÓN EXTERNA:
+  // Guardamos solo el ID. No podemos usar @relation porque Materia está en otra DB.
+  id_materia  Int
+
+  @@map("profesor_materia")
+}
