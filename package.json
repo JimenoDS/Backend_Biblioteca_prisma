@@ -18,13 +18,22 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "// --- COMANDOS DE PRISMA CONFIGURADOS ---": "",
-    "prisma:generate": "prisma generate --config prisma.config.usuarios.ts && prisma generate --config prisma.config.carreras.ts && prisma generate --config prisma.config.profesores.ts",
-    "migrate:usuarios": "prisma migrate dev --config prisma.config.usuarios.ts --name init_usuarios",
-    "migrate:carreras": "prisma migrate dev --config prisma.config.carreras.ts --name init_carreras",
-    "migrate:profesores": "prisma migrate dev --config prisma.config.profesores.ts --name init_profesores",
+
+    "// --- COMANDOS PRISMA: USUARIOS ---": "",
+    "generate:usuarios": "prisma generate --config prisma.config.usuarios.ts",
+    "migrate:usuarios": "prisma migrate dev --config prisma.config.usuarios.ts",
+
+    "// --- COMANDOS PRISMA: CARRERAS ---": "",
+    "generate:carreras": "prisma generate --config prisma.config.carreras.ts",
+    "migrate:carreras": "prisma migrate dev --config prisma.config.carreras.ts",
+
+    "// --- COMANDOS PRISMA: PROFESORES ---": "",
+    "generate:profesores": "prisma generate --config prisma.config.profesores.ts",
+    "migrate:profesores": "prisma migrate dev --config prisma.config.profesores.ts",
+
+    "// --- UTILIDADES ---": "",
     "seed:usuarios": "ts-node prisma/seed_usuarios.ts",
-    "postinstall": "npm run prisma:generate"
+    "postinstall": "npm run generate:usuarios && npm run generate:carreras && npm run generate:profesores"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
