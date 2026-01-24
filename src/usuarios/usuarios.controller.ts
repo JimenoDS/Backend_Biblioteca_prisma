@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
-@Controller('usuarios') // <--- La ruta ahora es /usuarios
+@Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
@@ -13,22 +13,41 @@ export class UsuariosController {
   }
 
   @Get()
-  findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
+  findAll(@Query('page') page: string, @Query('limit') limit: string) {
     return this.usuariosService.findAll(Number(page) || 1, Number(limit) || 10);
   }
 
+  // --- PARTE 3: Endpoint para Reporte Nativo ---
+  @Get('reporte/ranking-materias')
+  getReporteNativo() {
+    return this.usuariosService.reporteEstudiantesMaterias();
+  }
+  // ---------------------------------------------
+
+  // --- PARTE 1 & 2: Endpoint para Filtros Lógicos ---
+  @Get('buscar/logico')
+  findLogicos(@Query('idCarrera') idCarrera: string, @Query('idCiclo') idCiclo: string) {
+    return this.usuariosService.findEstudiantesLogicos(+idCarrera, +idCiclo);
+  }
+
+  @Get('activos-con-carrera')
+  findActivos() {
+    return this.usuariosService.findAllActiveWithCarrera();
+  }
+  // --------------------------------------------------
+
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usuariosService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.usuariosService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuariosService.update(id, updateUsuarioDto);
+  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.usuariosService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.usuariosService.remove(+id);
   }
 }

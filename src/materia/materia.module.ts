@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MateriasService } from './materia.service';
+import { MateriaService } from './materia.service';
 import { MateriasController } from './materia.controller';
+import { PrismaModule } from 'src/prisma/prisma.module'; // <--- IMPORTANTE
 
 @Module({
+  imports: [PrismaModule], // <--- AGREGAR
   controllers: [MateriasController],
-  providers: [MateriasService],
+  providers: [MateriaService, ],
 })
 export class MateriaModule {}

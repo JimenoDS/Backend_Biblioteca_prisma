@@ -1,39 +1,39 @@
+// src/carreras/carreras.service.ts
+
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaCarrerasService } from 'src/prisma/prisma-carreras.service';
 import { CreateCarreraDto } from './dto/create-carrera.dto';
 import { UpdateCarreraDto } from './dto/update-carrera.dto';
-import { PrismaCarrerasService } from 'src/prisma/prisma-carreras.service'; // <--- CAMBIO
 
 @Injectable()
 export class CarrerasService {
-  constructor(private prisma: PrismaCarrerasService) {} // <--- CAMBIO
+  constructor(private prisma: PrismaCarrerasService) {}
 
-  create(createCarreraDto: CreateCarreraDto) {
-    return this.prisma.carrera.create({
-      data: createCarreraDto,
-    });
-  }
-
-  async findAll() {
-    return this.prisma.carrera.findMany();
-  }
-
+  // ... (CRUD Básico existente) ...
+  create(dto: CreateCarreraDto) { return this.prisma.carrera.create({ data: dto }); }
+  findAll() { return this.prisma.carrera.findMany(); }
   async findOne(id: number) {
-    const carrera = await this.prisma.carrera.findUnique({
-      where: { id_carrera: id },
-    });
-    if (!carrera) throw new NotFoundException(`Carrera con ID #${id} no encontrada`);
-    return carrera;
+      const c = await this.prisma.carrera.findUnique({ where: { id_carrera: id }});
+      if(!c) throw new NotFoundException('Carrera no encontrada');
+      return c;
   }
+  update(id: number, dto: UpdateCarreraDto) { return this.prisma.carrera.update({ where: {id_carrera: id}, data: dto}); }
+  remove(id: number) { return this.prisma.carrera.delete({ where: {id_carrera: id}}); }
 
-  async update(id: number, dto: UpdateCarreraDto) {
-    await this.findOne(id); // Verificar existencia
-    return this.prisma.carrera.update({ where: { id_carrera: id }, data: dto });
-  }
+  // --- PARTE 1: Consultas Derivadas ---
 
-  async remove(id: number) {
-    await this.findOne(id); 
-    return this.prisma.carrera.delete({
-      where: { id_carrera: id },
+  // Obtener materias asociadas a una carrera específica
+  async findMateriasPorCarrera(idCarrera: number) {
+    // Verificar que la carrera existe
+    await this.findOne(idCarrera);
+
+    return this.prisma.materia.findMany({
+      where: {
+        id_carrera: idCarrera,
+      },
+      orderBy: {
+        nombre_materia: 'asc',
+      },
     });
   }
 }

@@ -1,4 +1,4 @@
-// prisma/profesores/schema.prisma
+// prisma/schema_profesores.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -16,6 +16,11 @@ model Profesor {
   apellidos          String
   cedula             String            @unique
   email              String            @unique
+  
+  // <--- NUEVOS CAMPOS
+  activo             Boolean           @default(true)
+  dedicacion         String            @default("TIEMPO_COMPLETO") // Ej: "MEDIO_TIEMPO", "TIEMPO_COMPLETO"
+  // ------------------
   
   titulos            Titulo[]
   materias_asignadas ProfesorMateria[]
@@ -37,12 +42,9 @@ model Titulo {
 
 model ProfesorMateria {
   id          Int      @id @default(autoincrement())
-  
   id_profesor Int
   profesor    Profesor @relation(fields: [id_profesor], references: [id_profesor])
   
-  // RELACIÓN EXTERNA:
-  // Guardamos solo el ID. No podemos usar @relation porque Materia está en otra DB.
   id_materia  Int
 
   @@map("profesor_materia")

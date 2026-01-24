@@ -1,35 +1,36 @@
-import { IsString, IsEmail, Length, IsOptional, IsDateString, IsNotEmpty, IsInt } from 'class-validator';
+import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
   @IsNotEmpty()
-  @Length(2, 100)
   nombres: string;
 
   @IsString()
   @IsNotEmpty()
-  @Length(2, 100)
   apellidos: string;
 
   @IsString()
   @IsNotEmpty()
-  @Length(6, 10)
   cedula: string;
 
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 
   @IsString()
-  @IsNotEmpty()
-  @Length(6, 50, { message: 'La contraseña debe tener entre 6 y 50 caracteres' })
+  @MinLength(6)
   password: string;
 
   @IsOptional()
-  @IsDateString()
+  @IsString()
   fecha_nacimiento?: string;
 
-  // Nuevo campo para el Rol (opcional porque en el servicio le pusimos un default)
-  @IsInt()
   @IsOptional()
+  @IsInt()
   id_rol?: number;
+
+  // --- AGREGAR ESTO PARA CORREGIR EL ERROR ---
+  @IsOptional()
+  @IsInt()
+  id_carrera?: number;
 }

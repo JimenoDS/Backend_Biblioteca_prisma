@@ -6,7 +6,7 @@ import { PrismaCarrerasService } from 'src/prisma/prisma-carreras.service';
 
 @Injectable()
 export class CiclosService {
-  // Inyectamos PrismaCarrerasService
+  
   constructor(private prisma: PrismaCarrerasService) {}
 
   // Crear

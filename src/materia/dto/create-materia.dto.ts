@@ -1,18 +1,21 @@
-import { IsString, IsNotEmpty, IsInt, IsPositive } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
 
 export class CreateMateriaDto {
   @IsString()
-  @IsNotEmpty({ message: 'El nombre de la materia es obligatorio' })
+  @IsNotEmpty()
   nombre_materia: string;
 
   @IsInt()
-  @IsPositive()
+  @Min(1)
   creditos: number;
 
-  // Clave foránea para la Carrera
   @IsInt()
-  @IsPositive()
+  @IsNotEmpty()
   id_carrera: number;
 
-  
+  // --- NUEVO CAMPO ---
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  cupos_disponibles?: number;
 }

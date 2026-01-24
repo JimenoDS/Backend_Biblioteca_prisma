@@ -1,58 +1,46 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMateriaDto } from './dto/create-materia.dto';
 import { UpdateMateriaDto } from './dto/update-materia.dto';
-// Importamos el servicio específico de Carreras
-import { PrismaCarrerasService } from 'src/prisma/prisma-carreras.service'; 
+import { PrismaCarrerasService } from 'src/prisma/prisma-carreras.service'; // <--- USAR ESTE SERVICIO
 
 @Injectable()
-export class MateriasService {
-  // Inyectamos PrismaCarrerasService en lugar del genérico
-  constructor(private prisma: PrismaCarrerasService) {}
+export class MateriaService {
+  constructor(private prisma: PrismaCarrerasService) {} // <--- INYECCIÓN CORRECTA
 
   async create(createMateriaDto: CreateMateriaDto) {
-    // Validamos que la carrera exista antes de crear la materia (integridad referencial en misma DB)
-    const carreraExists = await this.prisma.carrera.findUnique({
-      where: { id_carrera: createMateriaDto.id_carrera },
+    // Verificamos que la carrera exista antes de crear la materia
+    const carrera = await this.prisma.carrera.findUnique({
+      where: { id_carrera: createMateriaDto.id_carrera }
     });
-
-    if (!carreraExists) {
-      throw new NotFoundException(`Carrera con ID ${createMateriaDto.id_carrera} no encontrada`);
+    
+    if (!carrera) {
+      throw new NotFoundException(`La carrera con ID ${createMateriaDto.id_carrera} no existe.`);
     }
 
     return this.prisma.materia.create({
-      data: createMateriaDto,
+      data: {
+        nombre_materia: createMateriaDto.nombre_materia,
+        creditos: createMateriaDto.creditos,
+        id_carrera: createMateriaDto.id_carrera,
+        cupos_disponibles: createMateriaDto.cupos_disponibles || 30 // Valor por defecto si no se envía
+      },
     });
   }
 
   findAll() {
-    return this.prisma.materia.findMany({
-      include: { carrera: true }, // Relación interna, funciona perfecto
-    });
+    return this.prisma.materia.findMany();
   }
 
   async findOne(id: number) {
     const materia = await this.prisma.materia.findUnique({
       where: { id_materia: id },
-      include: { carrera: true },
     });
-    if (!materia) throw new NotFoundException(`Materia ${id} no encontrada`);
+    if (!materia) throw new NotFoundException(`Materia #${id} no encontrada`);
     return materia;
   }
 
   async update(id: number, updateMateriaDto: UpdateMateriaDto) {
-    // Verificar existencia
-    await this.findOne(id); 
-
-    // Si intentan cambiar la carrera, validamos que la nueva exista
-    if (updateMateriaDto.id_carrera) {
-       const carreraExists = await this.prisma.carrera.findUnique({
-        where: { id_carrera: updateMateriaDto.id_carrera },
-      });
-      if (!carreraExists) {
-        throw new NotFoundException(`Carrera con ID ${updateMateriaDto.id_carrera} no encontrada`);
-      }
-    }
-
+    await this.findOne(id);
     return this.prisma.materia.update({
       where: { id_materia: id },
       data: updateMateriaDto,
@@ -60,7 +48,9 @@ export class MateriasService {
   }
 
   async remove(id: number) {
-    await this.findOne(id); // Verificar existencia
-    return this.prisma.materia.delete({ where: { id_materia: id } });
+    await this.findOne(id);
+    return this.prisma.materia.delete({
+      where: { id_materia: id },
+    });
   }
 }

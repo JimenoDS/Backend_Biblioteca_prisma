@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "profesores" ADD COLUMN     "activo" BOOLEAN NOT NULL DEFAULT true,
+ADD COLUMN     "dedicacion" TEXT NOT NULL DEFAULT 'TIEMPO_COMPLETO';

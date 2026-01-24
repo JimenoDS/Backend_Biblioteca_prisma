@@ -1,12 +1,12 @@
 import {Controller,Get,Post,Body,Patch,Param,Delete,ParseIntPipe,
 } from '@nestjs/common';
-import { MateriasService } from './materia.service';
+import { MateriaService } from './materia.service';
 import { CreateMateriaDto } from './dto/create-materia.dto';
 import { UpdateMateriaDto } from './dto/update-materia.dto';
 
 @Controller('materias')
 export class MateriasController {
-  constructor(private readonly materiasService: MateriasService) {}
+  constructor(private readonly materiasService: MateriaService) {}
 
   @Post()
   create(@Body() createMateriaDto: CreateMateriaDto) {

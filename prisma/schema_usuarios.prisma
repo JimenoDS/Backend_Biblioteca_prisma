@@ -1,14 +1,13 @@
-// prisma/usuarios/schema.prisma
+// prisma/schema_usuarios.prisma
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/@prisma/client-usuarios" 
-  // Usa "../" porque el archivo está dentro de la carpeta 'prisma'
+  output   = "../node_modules/@prisma/client-usuarios"
 }
 
 datasource db {
   provider = "postgresql"
-
+  
 }
 
 model Usuario {
@@ -20,7 +19,11 @@ model Usuario {
   password         String    @db.VarChar(255)
   fecha_nacimiento DateTime? @db.Date
   
-  // Relaciones Locales
+  // <--- NUEVOS CAMPOS REQUERIDOS POR LA ACTIVIDAD
+  activo           Boolean   @default(true) 
+  id_carrera       Int?      // Relación lógica con la DB de Carreras
+  // ----------------------------------------------
+
   id_rol           Int
   rol              Rol       @relation(fields: [id_rol], references: [id_rol])
 
@@ -31,8 +34,7 @@ model Usuario {
 
 model Rol {
   id_rol      Int          @id @default(autoincrement())
-  nombre_rol  String       @unique // Ej: "Admin", "Estudiante", "Profesor"
-  
+  nombre_rol  String       @unique 
   usuarios    Usuario[]
   permisos    RolPermiso[]
 
@@ -42,8 +44,7 @@ model Rol {
 model Permiso {
   id_permiso     Int          @id @default(autoincrement())
   nombre_permiso String       @unique 
-  clave          String       @unique // Ej: "CREAR_MATERIA"
-  
+  clave          String       @unique 
   roles          RolPermiso[]
 
   @@map("permisos")
@@ -52,7 +53,6 @@ model Permiso {
 model RolPermiso {
   id_rol     Int
   id_permiso Int
-  
   rol        Rol     @relation(fields: [id_rol], references: [id_rol])
   permiso    Permiso @relation(fields: [id_permiso], references: [id_permiso])
 
@@ -65,12 +65,9 @@ model Inscripcion {
   fecha_inscripcion  DateTime @default(now())
   calificacion_final Decimal? @db.Decimal(4, 2)
 
-  // Relación Local (Usuario sí existe en esta DB)
   id_usuario         Int
   usuario            Usuario  @relation(fields: [id_usuario], references: [id_usuario])
   
-  // RELACIONES EXTERNAS (Apuntan a la DB de Carreras):
-  // Guardamos solo los IDs. La validación se hace en el Service.
   id_materia         Int
   id_ciclo           Int
 

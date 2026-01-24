@@ -1,19 +1,19 @@
-import { Global, Module } from '@nestjs/common';
-import { PrismaCarrerasService } from './prisma-carreras.service';
-import { PrismaProfesoresService } from './prisma-profesores.service';
+import { Module, Global } from '@nestjs/common';
 import { PrismaUsuariosService } from './prisma-usuarios.service';
+import { PrismaCarrerasService } from './prisma-carreras.service'; // <--- IMPORTAR
+import { PrismaProfesoresService } from './prisma-profesores.service'; // <--- IMPORTAR
 
-@Global()
+@Global() // <--- Importante: Esto hace que no tengas que importar PrismaModule en todos lados, pero es buena práctica tenerlo
 @Module({
   providers: [
-    PrismaCarrerasService, 
-    PrismaProfesoresService, 
-    PrismaUsuariosService
+    PrismaUsuariosService, 
+    PrismaCarrerasService, // <--- AGREGAR
+    PrismaProfesoresService // <--- AGREGAR
   ],
   exports: [
-    PrismaCarrerasService, 
-    PrismaProfesoresService, 
-    PrismaUsuariosService
+    PrismaUsuariosService, 
+    PrismaCarrerasService, // <--- AGREGAR
+    PrismaProfesoresService // <--- AGREGAR
   ],
 })
 export class PrismaModule {}

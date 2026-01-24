@@ -1,4 +1,4 @@
-// prisma/carreras/schema.prisma
+// prisma/schema_carreras.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -8,7 +8,6 @@ generator client {
 datasource db {
   provider = "postgresql"
   
-
 }
 
 model Carrera {
@@ -23,26 +22,25 @@ model Carrera {
 }
 
 model Materia {
-  id_materia     Int      @id @default(autoincrement())
-  nombre_materia String
-  creditos       Int
+  id_materia        Int      @id @default(autoincrement())
+  nombre_materia    String
+  creditos          Int
   
-  id_carrera     Int
-  carrera        Carrera  @relation(fields: [id_carrera], references: [id_carrera])
+  // <--- NUEVO CAMPO
+  cupos_disponibles Int      @default(30)
+  // ----------------
 
-  // NOTA: Se eliminaron las relaciones inversas a Inscripcion y ProfesorMateria
-  // porque esas tablas ahora viven en otras bases de datos.
+  id_carrera        Int
+  carrera           Carrera  @relation(fields: [id_carrera], references: [id_carrera])
 
   @@map("materias")
 }
 
 model Ciclo {
   id_ciclo     Int       @id @default(autoincrement())
-  nombre_ciclo String    @unique // Ej: "2025-I"
+  nombre_ciclo String    @unique 
   fecha_inicio DateTime? @db.Date
   fecha_fin    DateTime? @db.Date
-
-  // Se eliminó la relación inversa a Inscripcion
 
   @@map("ciclos")
 }
