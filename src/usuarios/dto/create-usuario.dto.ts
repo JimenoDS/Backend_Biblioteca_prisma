@@ -1,4 +1,4 @@
-import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, MinLength, IsBoolean } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
@@ -29,8 +29,12 @@ export class CreateUsuarioDto {
   @IsInt()
   id_rol?: number;
 
-  // --- AGREGAR ESTO PARA CORREGIR EL ERROR ---
   @IsOptional()
   @IsInt()
   id_carrera?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  activo?: boolean;
+
 }
