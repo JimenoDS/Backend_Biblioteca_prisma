@@ -12,23 +12,35 @@ export class ProfesoresController {
     return this.profesoresService.create(createProfesorDto);
   }
 
+  // ==================================================================
+  // ZONA DE REPORTES Y FILTROS (DEBEN IR AQUÍ, ANTES DEL :id)
+  // ==================================================================
+
+  // 1. Docentes con más de una materia
+  // URL Postman: http://localhost:3000/profesores/multi-materia
+  @Get('multi-materia')
+  findMultiMateria() {
+    return this.profesoresService.findDocentesMultiMateria();
+  }
+
+  // 2. Filtros Lógicos
+  // URL Postman: http://localhost:3000/profesores/logico
+  @Get('logico')
+  findLogicos() {
+    return this.profesoresService.findDocentesLogicos();
+  }
+
+  // ==================================================================
+  // FIN ZONA DE REPORTES
+  // ==================================================================
+
   @Get()
   findAll() {
     return this.profesoresService.findAll();
   }
 
-  // --- NUEVO: PARTE 1 (Docentes con más de una materia) ---
-  @Get('reporte/multi-materia')
-  findMultiMateria() {
-    return this.profesoresService.findDocentesMultiMateria();
-  }
-
-  // --- NUEVO: PARTE 2 (Filtros Lógicos OR/AND) ---
-  @Get('reporte/logico')
-  findLogicos() {
-    return this.profesoresService.findDocentesLogicos();
-  }
-
+  // IMPORTANTE: Este @Get(':id') captura CUALQUIER COSA que no coincida arriba.
+  // Por eso debe ir al final de los Gets.
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.profesoresService.findOne(+id);

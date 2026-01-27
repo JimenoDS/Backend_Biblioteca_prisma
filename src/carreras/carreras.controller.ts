@@ -35,4 +35,10 @@ update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCarreraDto) {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.carrerasService.remove(id);
   }
+  // En src/carreras/carreras.controller.ts
+
+@Get(':id/materias')
+async findMateriasPorCarrera(@Param('id') id: string) {
+  return this.carrerasService.findMateriasPorCarrera(+id);
+}
 }

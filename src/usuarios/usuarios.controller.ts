@@ -5,7 +5,9 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
-  constructor(private readonly usuariosService: UsuariosService) {}
+  constructor(
+    private readonly usuariosService: UsuariosService
+  ) {}
 
   @Post()
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
@@ -17,24 +19,24 @@ export class UsuariosController {
     return this.usuariosService.findAll(Number(page) || 1, Number(limit) || 10);
   }
 
-  // --- PARTE 3: Endpoint para Reporte Nativo ---
-  @Get('reporte/ranking-materias')
-  getReporteNativo() {
-    return this.usuariosService.reporteEstudiantesMaterias();
+  // --- PARTE 1: Consultas Derivadas ---
+  // Listar estudiantes activos con su carrera
+  @Get('activos-con-carrera')
+  findActivos() {
+    return this.usuariosService.findAllActiveWithCarrera();
   }
-  // ---------------------------------------------
 
-  // --- PARTE 1 & 2: Endpoint para Filtros Lógicos ---
+  // --- PARTE 2: Endpoint para Filtros Lógicos ---
   @Get('buscar/logico')
   findLogicos(@Query('idCarrera') idCarrera: string, @Query('idCiclo') idCiclo: string) {
     return this.usuariosService.findEstudiantesLogicos(+idCarrera, +idCiclo);
   }
 
-  @Get('activos-con-carrera')
-  findActivos() {
-    return this.usuariosService.findAllActiveWithCarrera();
+  // --- PARTE 3: Endpoint para Reporte Nativo ---
+  @Get('reporte/ranking-materias')
+  getReporteNativo() {
+    return this.usuariosService.reporteEstudiantesMaterias();
   }
-  // --------------------------------------------------
 
   @Get(':id')
   findOne(@Param('id') id: string) {

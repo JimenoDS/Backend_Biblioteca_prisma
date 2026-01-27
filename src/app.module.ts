@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config'; // <--- IMPORTANTE: Importar ConfigModule
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
@@ -11,6 +11,10 @@ import { MateriaModule } from './materia/materia.module';
 import { CiclosModule } from './ciclos/ciclos.module';
 import { InscripcionesModule } from './inscripciones/inscripciones.module';
 
+// Módulos de Docentes (¡ESTOS FALTABAN!)
+import { ProfesoresModule } from './profesores/profesores.module';
+import { TitulosModule } from './titulos/titulos.module';
+
 // Módulos de Usuarios y Seguridad
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolesModule } from './roles/roles.module';
@@ -19,8 +23,7 @@ import { RolPermisoModule } from './rol-permiso/rol-permiso.module';
 
 @Module({
   imports: [
-    // 1. Configuración global de variables de entorno
-    // Esto carga el archivo .env para que Prisma y Auth puedan leerlo
+    // 1. Configuración global
     ConfigModule.forRoot({
       isGlobal: true, 
       envFilePath: '.env',
@@ -41,6 +44,10 @@ import { RolPermisoModule } from './rol-permiso/rol-permiso.module';
     MateriaModule,
     CiclosModule,
     InscripcionesModule,
+    
+    // 5. Docentes (Aquí registramos el módulo para que funcionen las rutas)
+    ProfesoresModule,
+    TitulosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

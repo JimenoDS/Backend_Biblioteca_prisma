@@ -94,33 +94,31 @@ export class ProfesoresService {
       },
     });
   }
-
+// ==========================================
+  // PARTE 2: Operaciones Lógicas (VERSIÓN SEGURA)
   // ==========================================
-  // PARTE 2: Operaciones Lógicas
-  // ==========================================
-
-  // Filtrar docentes que:
-  // (Sean de tiempo completo AND Dicten asignaturas) OR (No estén inactivos -> Activos)
   async findDocentesLogicos() {
     return this.prisma.profesor.findMany({
       where: {
         OR: [
-          // CONDICIÓN A: Tiempo Completo Y Dictan algo
+          // CONDICIÓN A: (AND) Que tenga ID válido Y tenga un email
           {
             AND: [
-              { dedicacion: 'TIEMPO_COMPLETO' },
-              { materias_asignadas: { some: {} } } // some: {} valida que el array no esté vacío
+              { id_profesor: { gt: 0 } },      // ID mayor a 0
+              { email: { contains: '@' } }     // Email contiene arroba
             ]
           },
-          // CONDICIÓN B: No inactivos (Es decir, Activos)
+          // CONDICIÓN B: (NOT) Que NO esté inactivo
           {
-            activo: true 
+            NOT: {
+              activo: false
+            }
           }
         ]
       },
-      include: {
-        materias_asignadas: true
-      }
+  
     });
   }
+
+  
 }

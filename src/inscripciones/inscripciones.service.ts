@@ -11,20 +11,22 @@ export class InscripcionesService {
     private prismaCarreras: PrismaCarrerasService,
   ) {}
 
-  // --- PARTE 4: Operación Transaccional (Saga ACID) ---
+  // --- PARTE 4: Transacción de Matrícula (Saga Pattern) ---
   async matricularEstudiante(dto: CreateInscripcioneDto) {
     const { id_estudiante, id_materia, id_ciclo } = dto;
 
-    // 1. VERIFICACIONES DE CONSISTENCIA (Reads)
-    
-    // A) Verificar Estudiante Activo (DB Usuarios)
+    // ===============================================================
+    // PASO 1: VALIDACIONES PREVIAS (Para evitar fallos innecesarios)
+    // ===============================================================
+
+    // 1. Verificar que el estudiante exista y esté ACTIVO
     const estudiante = await this.prismaUsuarios.usuario.findUnique({ 
       where: { id_usuario: id_estudiante } 
     });
     if (!estudiante) throw new NotFoundException('Estudiante no encontrado');
     if (!estudiante.activo) throw new BadRequestException('El estudiante no está ACTIVO y no puede matricularse.');
 
-    // B) Verificar Materia y Cupos (DB Carreras)
+    // 2. Verificar que la materia exista y tenga CUPOS
     const materia = await this.prismaCarreras.materia.findUnique({ 
       where: { id_materia } 
     });
@@ -33,23 +35,23 @@ export class InscripcionesService {
       throw new ConflictException('No hay cupos disponibles en esta materia.');
     }
 
-    // 2. EJECUCIÓN TRANSACCIONAL
-    // Como son BDs distintas, hacemos una "Saga": Paso 1 -> Paso 2 -> Si falla Paso 2, deshacer Paso 1.
+    // ===============================================================
+    // PASO 2: EJECUCIÓN DE LA TRANSACCIÓN DISTRIBUIDA
+    // ===============================================================
     
     let inscripcionCreada = null;
 
     try {
-      // PASO 1 (Atomicidad): Registrar Matrícula
+      // A) OPERACIÓN 1: Registrar la matrícula (BD Usuarios)
       inscripcionCreada = await this.prismaUsuarios.inscripcion.create({
         data: {
           id_usuario: id_estudiante,
           id_materia,
           id_ciclo,
-          // calificacion_final: null // Inicialmente sin nota
         }
       });
 
-      // PASO 2 (Atomicidad): Descontar Cupo
+      // B) OPERACIÓN 2: Descontar el cupo (BD Carreras)
       await this.prismaCarreras.materia.update({
         where: { id_materia },
         data: {
@@ -57,7 +59,7 @@ export class InscripcionesService {
         }
       });
 
-      // ÉXITO (Commit implícito)
+      // SI LLEGAMOS AQUÍ, TODO SALIÓ BIEN (COMMIT IMPLÍCITO)
       return {
         status: 'success',
         mensaje: 'Matrícula realizada exitosamente',
@@ -66,56 +68,52 @@ export class InscripcionesService {
       };
 
     } catch (error) {
-      // --- ROLLBACK MANUAL (Durabilidad / Consistencia) ---
+      // ===============================================================
+      // ROLLBACK MANUAL (COMPENSACIÓN)
+      // ===============================================================
       console.error('Error durante la matrícula. Iniciando rollback...', error);
 
+      // Si se creó la inscripción pero falló la actualización de cupos...
       if (inscripcionCreada) {
-        // Si la inscripción se creó pero falló el descuento de cupos, la borramos
+        // ... BORRAMOS la inscripción para volver al estado original.
         await this.prismaUsuarios.inscripcion.delete({
           where: { id_inscripcion: inscripcionCreada.id_inscripcion }
         });
-        console.log('Rollback completado: Inscripción eliminada para mantener consistencia.');
+        console.log('Rollback completado: Inscripción eliminada.');
       }
 
-      // Re-lanzamos el error para que el cliente sepa qué pasó
-      if (error instanceof ConflictException || error instanceof BadRequestException) {
-          throw error;
-      }
-      throw new InternalServerErrorException('Error procesando la matrícula. Se ha revertido la operación.');
+      // Reenviamos el error original para que Postman lo vea
+      throw new InternalServerErrorException('Error en la transacción. Se han revertido los cambios.');
     }
   }
 
-  // --- CRUD BÁSICO y OTRAS CONSULTAS ---
+  // --- Otros Métodos (Lectura del Paso 4 anterior) ---
+  
+  async findInscripcionesPorEstudianteYCiclo(idUsuario: number, idCiclo: number) {
+    const inscripciones = await this.prismaUsuarios.inscripcion.findMany({
+      where: { id_usuario: idUsuario, id_ciclo: idCiclo }
+    });
+    if (!inscripciones.length) return [];
+    
+    const materiaIds = inscripciones.map(i => i.id_materia);
+    const materias = await this.prismaCarreras.materia.findMany({
+      where: { id_materia: { in: materiaIds } }
+    });
 
-  async create(dto: CreateInscripcioneDto) {
-    // Este método queda como fallback simple, pero preferimos usar matricularEstudiante
-    return this.matricularEstudiante(dto);
-  }
-
-  async findAll() {
-    return this.prismaUsuarios.inscripcion.findMany({
-      include: { usuario: true },
+    return inscripciones.map(inscripcion => {
+      const infoMateria = materias.find(m => m.id_materia === inscripcion.id_materia);
+      return {
+        ...inscripcion,
+        nombre_materia: infoMateria ? infoMateria.nombre_materia : 'Desconocida',
+        creditos: infoMateria ? infoMateria.creditos : 0
+      };
     });
   }
 
-  async findOne(id: number) {
-    const inscripcion = await this.prismaUsuarios.inscripcion.findUnique({
-      where: { id_inscripcion: id },
-    });
-    if (!inscripcion) throw new NotFoundException('Inscripción no encontrada');
-    return inscripcion;
-  }
-
-  async update(id: number, updateInscripcioneDto: UpdateInscripcioneDto) {
-    return this.prismaUsuarios.inscripcion.update({
-      where: { id_inscripcion: id },
-      data: updateInscripcioneDto as any,
-    });
-  }
-
-  async remove(id: number) {
-    return this.prismaUsuarios.inscripcion.delete({
-      where: { id_inscripcion: id },
-    });
-  }
+  // Métodos CRUD básicos requeridos por la interfaz
+  async create(dto: CreateInscripcioneDto) { return this.matricularEstudiante(dto); }
+  async findAll() { return this.prismaUsuarios.inscripcion.findMany(); }
+  async findOne(id: number) { return this.prismaUsuarios.inscripcion.findUnique({ where: { id_inscripcion: id } }); }
+  async update(id: number, dto: UpdateInscripcioneDto) { return this.prismaUsuarios.inscripcion.update({ where: { id_inscripcion: id }, data: dto as any }); }
+  async remove(id: number) { return this.prismaUsuarios.inscripcion.delete({ where: { id_inscripcion: id } }); }
 }
